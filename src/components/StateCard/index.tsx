@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { Box, Button, Grid, Tab, Tabs, Typography } from '@mui/material';
-import { LineChart } from '@mui/x-charts';
 import CloseIcon from '@mui/icons-material/Close';
+import { LineChart } from '@mui/x-charts';
 
 import { StateData, StateNames } from '../../models';
 import { buildChartData } from '../../utils/buildChartData';
