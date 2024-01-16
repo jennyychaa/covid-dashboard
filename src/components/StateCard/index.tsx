@@ -1,7 +1,7 @@
 import { useState } from 'react';
-import { Box, Button, Grid, Tab, Tabs, Typography } from '@material-ui/core';
+import { Box, Button, Grid, Tab, Tabs, Typography } from '@mui/material';
 import { LineChart } from '@mui/x-charts';
-import CloseIcon from '@material-ui/icons/Close';
+import CloseIcon from '@mui/icons-material/Close';
 
 import { StateData, StateNames } from '../../models';
 import { buildChartData } from '../../utils/buildChartData';

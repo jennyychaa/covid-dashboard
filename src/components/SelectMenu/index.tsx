@@ -1,12 +1,12 @@
-import { ChangeEvent } from 'react';
 import {
   FormControl,
   Grid,
   InputLabel,
   MenuItem,
   Select,
+  SelectChangeEvent,
   Typography
-} from '@material-ui/core';
+} from '@mui/material';
 
 import { STATES, SortType, State, StateAbbrs } from '../../models';
 import { useStatesDataContext } from '../../contexts/StatesDataProvider';
@@ -17,18 +17,12 @@ function SelectMenu() {
     action: { fetchStateData, sortStateData }
   } = useStatesDataContext();
 
-  const handleOnSelectState = (event: ChangeEvent<{
-    name?: string | undefined;
-    value: unknown;
-  }>) => {
+  const handleOnSelectState = (event: SelectChangeEvent<string>) => {
     fetchStateData(event.target.value as StateAbbrs);
   };
 
-  const handleSortStateData = (event: ChangeEvent<{
-    name?: string | undefined;
-    value: unknown;
-  }>) => {
-    sortStateData(event.target.value === SortType.ASC ? SortType.ASC : SortType.DESC);
+  const handleSortStateData = (event: SelectChangeEvent<string>) => {
+    sortStateData(event.target.value === String(SortType.ASC) ? SortType.ASC : SortType.DESC);
   };
 
   return (
@@ -43,6 +37,7 @@ function SelectMenu() {
             <Select
               disabled={STATES.length - states.length >= 5}
               autoWidth
+              data-testid="select-state"
               defaultValue=""
               id="select-state"
               label="Select a state"
@@ -57,11 +52,12 @@ function SelectMenu() {
           <FormControl fullWidth>
             <InputLabel htmlFor="sort">Sort</InputLabel>
             <Select
+              data-testid="sort"
               disabled={STATES.length - states.length === 0}
               id="sort"
               label="Sort States"
               onChange={handleSortStateData}
-              value={sortOrder}
+              value={String(sortOrder)}
             >
               <MenuItem value={SortType.ASC}>A to Z</MenuItem>
               <MenuItem value={SortType.DESC}>Z to A</MenuItem>

@@ -48,7 +48,12 @@ const dateFormatter = (date: Date) => date instanceof Date ? date.toLocaleDateSt
 
 export const buildChartData = (data: CovidData[]) => {
   const { dates, cases, currentHospitalizations, currentIcus, currentVentilators, hospitalizations, pcrTests, recovered } = parseCovidData(data);
-
+  /*
+  * Due to the limitations of the MUI Chart API, you cannot show information in the tooltip without passing data explicitly to the series array.
+  * If there was additional time to implement this app, I would either:
+  *   1. Find a chart library with this existing functionality
+  *   2. Override the existing chart functionality to only show Total Cases and Total Hospitalizations in the line graph.
+  */
   return {
     cases: {
       series: [

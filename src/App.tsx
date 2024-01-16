@@ -1,4 +1,4 @@
-import { CircularProgress, Container, Grid } from '@material-ui/core';
+import { CircularProgress, Container, Grid } from '@mui/material';
 
 import { StateData } from './models';
 import { useStatesDataContext } from './contexts/StatesDataProvider';

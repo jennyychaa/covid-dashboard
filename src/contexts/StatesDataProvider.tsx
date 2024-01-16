@@ -1,9 +1,4 @@
-import React, {
-  PropsWithChildren,
-  createContext,
-  useContext,
-  useState
-} from 'react';
+import { PropsWithChildren, createContext, useContext, useState } from 'react';
 
 import { STATES, CovidData, SortType, State, StateAbbrs, StateData, StateNames } from '../models';
 
