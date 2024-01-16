@@ -1,6 +1,6 @@
 # COVID-19 Data Dashboard
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+![screencapture-localhost-3000-2024-01-16-14_11_23 (1)](https://github.com/jennyychaa/covid-dashboard/assets/16579792/6251f52d-708b-4977-9ba3-eb1f422099af)
 
 ## Available Scripts
 
