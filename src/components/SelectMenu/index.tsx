@@ -28,8 +28,6 @@ function SelectMenu() {
     );
   };
 
-  console.log({ sortOrder });
-
   return (
     <Box
       component='header'
