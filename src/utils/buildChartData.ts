@@ -1,14 +1,14 @@
-import { CovidData, CovidDataType } from "../models";
+import { CovidData, CovidDataType } from '../models';
 
 const parseCovidData = (data: CovidData[]) => {
   const dates: Date[] = [],
-        cases: CovidDataType[] = [],
-        currentHospitalizations: CovidDataType[] = [],
-        currentIcus: CovidDataType[] = [],
-        currentVentilators: CovidDataType[] = [],
-        hospitalizations: CovidDataType[] = [],
-        pcrTests: CovidDataType[] = [],
-        recovered: CovidDataType[] = [];
+    cases: CovidDataType[] = [],
+    currentHospitalizations: CovidDataType[] = [],
+    currentIcus: CovidDataType[] = [],
+    currentVentilators: CovidDataType[] = [],
+    hospitalizations: CovidDataType[] = [],
+    pcrTests: CovidDataType[] = [],
+    recovered: CovidDataType[] = [];
 
   for (let i = 0; i < data.length; i++) {
     const {
@@ -19,7 +19,7 @@ const parseCovidData = (data: CovidData[]) => {
       totalCases,
       totalHospitalized,
       totalPcrTests,
-      totalRecovered
+      totalRecovered,
     } = data[i];
 
     dates.push(new Date(date));
@@ -41,36 +41,87 @@ const parseCovidData = (data: CovidData[]) => {
     hospitalizations,
     pcrTests,
     recovered,
-  }
-}
+  };
+};
 
-const dateFormatter = (date: Date) => date instanceof Date ? date.toLocaleDateString() : new Date(date).toLocaleDateString();
+const dateFormatter = (date: Date) =>
+  date instanceof Date
+    ? date.toLocaleDateString()
+    : new Date(date).toLocaleDateString();
 
 export const buildChartData = (data: CovidData[]) => {
-  const { dates, cases, currentHospitalizations, currentIcus, currentVentilators, hospitalizations, pcrTests, recovered } = parseCovidData(data);
+  const {
+    dates,
+    cases,
+    currentHospitalizations,
+    currentIcus,
+    currentVentilators,
+    hospitalizations,
+    pcrTests,
+    recovered,
+  } = parseCovidData(data);
   /*
-  * Due to the limitations of the MUI Chart API, you cannot show information in the tooltip without passing data explicitly to the series array.
-  * If there was additional time to implement this app, I would either:
-  *   1. Find a chart library with this existing functionality
-  *   2. Override the existing chart functionality to only show Total Cases and Total Hospitalizations in the line graph.
-  */
+   * Due to the limitations of the MUI Chart API, you cannot show information in the tooltip without passing data explicitly to the series array.
+   * As an alternative, I would either:
+   *   1. Find a chart library with this existing functionality
+   *   2. Override the existing chart functionality to only show Total Cases and Total Hospitalizations in the line graph.
+   */
   return {
     cases: {
       series: [
-        { data: cases, label: 'Total Cases', connectNulls: true, showMark: false },
-        { data: pcrTests, label: 'PCR Tests', connectNulls: true, showMark: false },
-        { data: recovered, label: 'Recovered Cases', connectNulls: true, showMark: false }
+        {
+          data: cases,
+          label: 'Total Cases',
+          connectNulls: true,
+          showMark: false,
+        },
+        {
+          data: pcrTests,
+          label: 'PCR Tests',
+          connectNulls: true,
+          showMark: false,
+        },
+        {
+          data: recovered,
+          label: 'Recovered Cases',
+          connectNulls: true,
+          showMark: false,
+        },
       ],
-      xAxis: [{ data: dates, scaleTyle: 'time', valueFormatter: dateFormatter }],
+      xAxis: [
+        { data: dates, scaleTyle: 'time', valueFormatter: dateFormatter },
+      ],
     },
     hospitalizations: {
       series: [
-        { data: hospitalizations, label: 'Total Hospitalizations', connectNulls: true, showMark: false },
-        { data: currentHospitalizations, label: 'Currently Hospitalized', connectNulls: true, showMark: false },
-        { data: currentIcus, label: 'Currently in ICU', connectNulls: true, showMark: false },
-        { data: currentVentilators, label: 'Currently on Ventilators', connectNulls: true, showMark: false }
+        {
+          data: hospitalizations,
+          label: 'Total Hospitalizations',
+          connectNulls: true,
+          showMark: false,
+        },
+        {
+          data: currentHospitalizations,
+          label: 'Currently Hospitalized',
+          connectNulls: true,
+          showMark: false,
+        },
+        {
+          data: currentIcus,
+          label: 'Currently in ICU',
+          connectNulls: true,
+          showMark: false,
+        },
+        {
+          data: currentVentilators,
+          label: 'Currently on Ventilators',
+          connectNulls: true,
+          showMark: false,
+        },
       ],
-      xAxis: [{ data: dates, scaleTyle: 'time', valueFormatter: dateFormatter }],
-    }
-  }
+      xAxis: [
+        { data: dates, scaleTyle: 'time', valueFormatter: dateFormatter },
+      ],
+    },
+  };
 };
