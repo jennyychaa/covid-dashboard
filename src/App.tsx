@@ -7,19 +7,21 @@ import StateCard from './components/StateCard';
 
 function App() {
   const {
-    data: { isUpdating, isLoading, statesData }
+    data: { isUpdating, isLoading, statesData },
   } = useStatesDataContext();
 
   return (
-    <Container maxWidth="lg" style={{ padding: '80px 40px' }}>
+    <Container maxWidth='lg' style={{ padding: '24px 40px' }}>
       <SelectMenu />
       {isUpdating ? (
-        <Grid container justifyContent="center">
+        <Grid container justifyContent='center'>
           <CircularProgress />
         </Grid>
-      ) : statesData.length > 0 && (
+      ) : (
+        statesData.length > 0 &&
         statesData.map(({ state, data }: StateData) => {
-          if (isLoading[state]) return <CircularProgress key={state} size="25px" />
+          if (isLoading[state])
+            return <CircularProgress key={state} size='25px' />;
           return <StateCard key={state} state={state} data={data} />;
         })
       )}
