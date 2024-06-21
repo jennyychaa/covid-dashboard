@@ -1,20 +1,21 @@
 import {
+  Box,
   FormControl,
   Grid,
   InputLabel,
   MenuItem,
   Select,
   SelectChangeEvent,
-  Typography
+  Typography,
 } from '@mui/material';
 
-import { STATES, SortType, State, StateAbbrs } from '../../models';
+import { USStates, SortType, State, StateAbbrs } from '../../models';
 import { useStatesDataContext } from '../../contexts/StatesDataProvider';
 
 function SelectMenu() {
   const {
     data: { selectedState, sortOrder, states },
-    action: { fetchStateData, sortStateData }
+    action: { fetchStateData, sortStateData },
   } = useStatesDataContext();
 
   const handleOnSelectState = (event: SelectChangeEvent<string>) => {
@@ -22,50 +23,63 @@ function SelectMenu() {
   };
 
   const handleSortStateData = (event: SelectChangeEvent<string>) => {
-    sortStateData(event.target.value === String(SortType.ASC) ? SortType.ASC : SortType.DESC);
+    sortStateData(
+      event.target.value === String(SortType.ASC) ? SortType.ASC : SortType.DESC
+    );
   };
 
+  console.log({ sortOrder });
+
   return (
-    <header style={{ marginBottom: '120px' }}>
-      <Typography variant="h5" component="h1" style={{ marginBottom: '40px', textTransform: 'uppercase' }}>
+    <Box
+      component='header'
+      style={{
+        marginBottom: '40px',
+        borderRadius: '16px',
+        backgroundColor: '#e3f2fd',
+        padding: '40px',
+      }}>
+      <Typography variant='h5' component='h1' style={{ marginBottom: '120px' }}>
         COVID-19 Data Dashboard
       </Typography>
-      <Grid container direction="row" justifyContent="space-around" spacing={4}>
+      <Grid container direction='row' justifyContent='space-around' spacing={4}>
         <Grid item xs={8}>
           <FormControl fullWidth>
-            <InputLabel htmlFor="select-state">Select a State</InputLabel>
+            <InputLabel htmlFor='select-state'>Select a State</InputLabel>
             <Select
-              disabled={STATES.length - states.length >= 5}
+              id='select-state'
               autoWidth
-              data-testid="select-state"
-              defaultValue=""
-              id="select-state"
-              label="Select a state"
+              data-testid='select-state'
+              defaultValue=''
+              disabled={USStates.length - states.length >= 5}
+              label='Select a state'
               onChange={handleOnSelectState}
-              value={selectedState}
-            >
-              {states.map(({ abbr, name }: State) => <MenuItem key={abbr} value={abbr}>{name}</MenuItem>)}
+              value={selectedState}>
+              {states.map(({ abbr, name }: State) => (
+                <MenuItem key={abbr} value={abbr}>
+                  {name}
+                </MenuItem>
+              ))}
             </Select>
           </FormControl>
         </Grid>
         <Grid item xs={4}>
           <FormControl fullWidth>
-            <InputLabel htmlFor="sort">Sort</InputLabel>
+            <InputLabel htmlFor='sort'>Sort</InputLabel>
             <Select
-              data-testid="sort"
-              disabled={STATES.length - states.length === 0}
-              id="sort"
-              label="Sort States"
+              data-testid='sort'
+              disabled={USStates.length - states.length === 0}
+              id='sort'
+              label='Sort States'
               onChange={handleSortStateData}
-              value={String(sortOrder)}
-            >
+              value={String(sortOrder)}>
               <MenuItem value={SortType.ASC}>A to Z</MenuItem>
               <MenuItem value={SortType.DESC}>Z to A</MenuItem>
             </Select>
           </FormControl>
         </Grid>
       </Grid>
-    </header>
+    </Box>
   );
 }
 
