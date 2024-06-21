@@ -4,7 +4,7 @@
 
 This user-friendly proof-of-concept application is designed for novice cryptocurrency enthusiasts (e.g., an elderly family member) to understand their transaction history on Ethereum effortlessly. The application should present the transaction history associated with a given wallet address straightforwardly and intuitively, akin to traditional bank transaction records. Despite the abundance of blockchain explorers available, their tendency to overwhelm users with excessive data often complicates understanding transactions. This project aims to harness available data sources and services to craft a more accessible and engaging user experience for a blockchain-novice audience.
 
-[🚀 Live Demo](#)
+[🚀 Live Demo](https://covid-dashboard-mu.vercel.app/)
 
 ## Prerequistes
 
