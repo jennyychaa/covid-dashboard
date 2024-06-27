@@ -37,7 +37,7 @@ export function useStatesDataContext() {
 
   if (!statesDataContext) {
     throw new Error(
-      'Auto-refill consent context is null. Did you forget to include AutoRefillConsentProvider in your tree?'
+      'The states data context is null. Did you forget to include StatesDataProvider in your tree?'
     );
   }
 
